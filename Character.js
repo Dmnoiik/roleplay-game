@@ -13,12 +13,17 @@ function Character(data) {
   };
 
   this.takeDamage = function (attackScoreArray) {
-    console.log(`${this.name} is damaged`);
-    console.log(attackScoreArray);
+    const totalAttackScore = attackScoreArray.reduce(
+      (total, currentElement) => {
+        return total + currentElement;
+      }
+    );
+    this.health = this.health - totalAttackScore;
   };
 
   this.getCharacterHtml = function () {
     const { name, avatar, health, diceArray } = this;
+    console.log(health);
     return `
             <div class="character-card">
                 <h4 class="name"> ${name} </h4>
