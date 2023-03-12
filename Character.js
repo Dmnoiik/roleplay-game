@@ -19,11 +19,14 @@ function Character(data) {
       }
     );
     this.health = this.health - totalAttackScore;
+    if (this.health <= 0) {
+      this.isDead = true;
+      this.health = 0;
+    }
   };
 
   this.getCharacterHtml = function () {
     const { name, avatar, health, diceArray } = this;
-    console.log(health);
     return `
             <div class="character-card">
                 <h4 class="name"> ${name} </h4>
