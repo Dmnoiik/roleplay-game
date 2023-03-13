@@ -6,11 +6,12 @@ import {
 
 function Character(data) {
   Object.assign(this, data);
-  this.diceArray = getDicePlaceholderHtml(this.diceCount);
+  this.diceArrayHtml = getDicePlaceholderHtml(this.diceCount);
   this.maxHealth = this.health;
-  this.getDiceHtml = () => {
+
+  this.setDiceHtml = () => {
     this.currentDiceScore = getDiceRollArray(this.diceCount);
-    this.diceArray = this.currentDiceScore
+    this.diceArrayHtml = this.currentDiceScore
       .map((dice) => `<div class="dice">${dice}</div>`)
       .join("");
   };
@@ -39,7 +40,7 @@ function Character(data) {
   };
 
   this.getCharacterHtml = () => {
-    const { name, avatar, health, diceArray } = this;
+    const { name, avatar, health, diceArrayHtml } = this;
     const healthBar = this.getHealthBarHtml();
     return `
             <div class="character-card">
@@ -48,7 +49,7 @@ function Character(data) {
                 <div class="health">health: <b> ${health} </b></div>
                 ${healthBar}
                 <div class="dice-container">
-                    ${diceArray}
+                    ${diceArrayHtml}
                 </div>
             </div>`;
   };
